@@ -1,0 +1,230 @@
+.records-page__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.records-page__profile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.records-page__profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.records-page__name {
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.records-page__platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.records-page__count {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.records-page__add {
+  padding: 12px 20px;
+  gap: 8px;
+}
+
+/* 방송 기록 표 */
+.records-table {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.records-table[aria-busy='true'] .records-table__body {
+  opacity: 0.6;
+}
+
+.records-table__head,
+.records-table__row {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.records-table__head {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  background: #fbf8ff;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.records-table__body {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.records-table__row {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.records-table__row:last-child {
+  border-bottom: none;
+}
+
+.records-table__row:hover {
+  background: #fbf8ff;
+}
+
+.records-table__date {
+  width: 100px;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.records-table__head .records-table__date {
+  font-size: 12px;
+}
+
+.records-table__platform {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.records-table__title {
+  flex: 1;
+  min-width: 0;
+  padding-right: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.records-table__head .records-table__title {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+a.records-table__title:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.records-table__source {
+  width: 80px;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.records-table__links {
+  width: 100px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.records-table__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.records-table__yt {
+  display: inline-flex;
+}
+
+.records-table__none {
+  color: var(--accent-muted);
+  font-size: 12px;
+}
+
+.records-table__actions {
+  width: 80px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.records-table__empty {
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--accent-soft);
+}
+
+@media (max-width: 720px) {
+  .records-table__head {
+    display: none;
+  }
+
+  .records-table__row {
+    flex-wrap: wrap;
+    row-gap: 8px;
+    padding: 14px 16px;
+  }
+
+  .records-table__date {
+    width: auto;
+    margin-right: 10px;
+  }
+
+  .records-table__platform {
+    width: auto;
+    flex: 1;
+  }
+
+  .records-table__title {
+    order: 10;
+    flex-basis: 100%;
+    padding-right: 0;
+    white-space: normal;
+  }
+
+  .records-table__source {
+    display: none;
+  }
+
+  .records-table__links {
+    width: auto;
+    order: 11;
+  }
+
+  .records-table__actions {
+    width: auto;
+  }
+}

@@ -1,0 +1,193 @@
+/* 방송 기록 입력 폼 */
+.stream-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.stream-form__fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.stream-form__fieldset legend {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.stream-form__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stream-form__streamer-pill {
+  padding: 8px 14px 8px 8px;
+  font-size: 13px;
+}
+
+.stream-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.stream-form__row > .sc-field {
+  flex: 1;
+  min-width: 180px;
+}
+
+.stream-form__source {
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13px;
+  background: #fff6d9;
+  color: #a9700a;
+}
+
+.stream-form__platforms {
+  display: flex;
+  gap: 8px;
+}
+
+.stream-form__platform-pill {
+  flex: 1;
+  padding: 10px 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.stream-form__hint {
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.stream-form__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.stream-form__buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.stream-form__buttons .btn {
+  padding: 12px 22px;
+}
+
+.stream-form__delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--danger);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.stream-form__delete:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 캘린더 상세 패널 */
+.detail-panel__title {
+  font-size: 19px;
+}
+
+.detail-panel__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 8px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.detail-panel__empty .sc-muted {
+  font-size: 13px;
+}
+
+.detail-panel__add {
+  padding: 9px 16px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.detail-panel__list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detail-panel__item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-panel__item:not(:last-child) {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.detail-panel__stream-title {
+  font-size: 16px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.detail-panel__meta {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.detail-panel__links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+a.link-row:hover {
+  background: var(--accent-soft);
+}
+
+.link-row--disabled {
+  color: #b5aec4;
+}
+
+@media (max-width: 520px) {
+  .stream-form__platforms {
+    flex-wrap: wrap;
+  }
+
+  .stream-form__platform-pill {
+    flex: 1 0 28%;
+  }
+}

@@ -1,0 +1,179 @@
+.streamer-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.streamer-page__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px 48px;
+}
+
+.streamer-page__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.streamer-page__heading-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.streamer-page__title {
+  font-size: 28px;
+}
+
+.streamer-page__add {
+  padding: 12px 20px;
+  gap: 8px;
+}
+
+/* 등록 폼 */
+.streamer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 32px;
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.streamer-form__title {
+  font-size: 17px;
+}
+
+.streamer-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.streamer-form__row > .sc-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.streamer-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.streamer-form__actions .btn {
+  border-radius: 10px;
+  padding: 11px 20px;
+}
+
+/* 카드 목록 */
+.streamer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.streamer-list__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.streamer-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.streamer-card__profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: -8px;
+  padding: 8px;
+  border-radius: 14px;
+  color: inherit;
+}
+
+.streamer-card__profile:hover {
+  background: #fbf8ff;
+}
+
+.streamer-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.streamer-card__name {
+  font-size: 17px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.streamer-card__count {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.streamer-card__platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 26px;
+}
+
+.streamer-card__no-platform {
+  font-size: 12px;
+  color: var(--accent-muted);
+  align-self: center;
+}
+
+.streamer-card__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.streamer-card__delete {
+  flex: 1;
+  padding: 9px;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--danger);
+}
+
+.streamer-card__delete:hover {
+  background: #ffe4e2;
+}
+
+@media (max-width: 720px) {
+  .streamer-page__main {
+    padding: 24px 16px;
+    gap: 24px;
+  }
+
+  .streamer-form {
+    padding: 20px;
+  }
+}

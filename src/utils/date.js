@@ -35,6 +35,12 @@ export function formatDate(date) {
   return `${y}-${m}-${d}`
 }
 
+// 'YYYY-MM-DD' 문자열 -> 로컬 자정 기준 Date (new Date('YYYY-MM-DD')는 UTC로 해석되므로 사용하지 않음)
+export function parseDate(value) {
+  const [y, m, d] = value.split('-').map(Number)
+  return new Date(y, m - 1, d)
+}
+
 // 두 날짜가 같은 날인지 비교 (시/분/초 무시)
 export function isSameDay(a, b) {
   return (
