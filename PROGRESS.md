@@ -1,6 +1,6 @@
 # 프론트엔드 작업 진척도 (StreamerCalendar-web)
 
-> 점검일: 2026-09-28 · 기준: `1d59f9c` + 미커밋 변경(관리자 인증) · 스펙 기준: 루트 `CLAUDE.md` (MVP 기능 / UI 디자인) · 디자인 기준: `streamercalendar-html/` 퍼블리싱 시안 6종
+> 점검일: 2026-09-28 · 기준: `34965e4` + 미커밋 변경(배포 설정) · 스펙 기준: 루트 `CLAUDE.md` (MVP 기능 / UI 디자인) · 디자인 기준: `streamercalendar-html/` 퍼블리싱 시안 6종
 
 ## 요약
 
@@ -15,14 +15,14 @@
 
 **진척도(체감): MVP 기준 약 90%.** 기능과 화면은 모두 동작합니다. 테스트, README, 브라우저 수동 점검이 남아 있습니다.
 
-> ⚠️ 관리자 인증 작업은 아직 커밋하지 않았습니다.
+> ⚠️ 배포 설정(`vercel.json`, Vite proxy)은 아직 커밋하지 않았습니다.
 
 ## 기술 스택 (실제)
 
 - **React 19 + Vite 8** (JavaScript, TypeScript 아님)
 - **react-router 8**
 - 캘린더는 라이브러리 없이 직접 구현했습니다 (`utils/date.js`의 `getMonthMatrix`).
-- API Base URL: `VITE_API_BASE_URL` (`.env.example` → `http://localhost:8080/api`). 세션 쿠키 때문에 모든 요청에 `credentials: 'include'`를 붙입니다.
+- API Base URL: 기본 `/api` (운영: Vercel rewrites, 개발: Vite proxy). `VITE_API_BASE_URL`로 바꿀 수 있습니다. 모든 요청에 `credentials: 'include'`를 붙입니다.
 - 폰트는 Google Fonts(Jua, Gowun Dodum)를 `index.html`에서 불러옵니다.
 
 ## 접근 구조 (라우트)
@@ -85,15 +85,20 @@ src/
 6. 모달에 포커스 트랩이 없습니다 (Tab 키로 모달 밖 요소까지 이동할 수 있음).
 7. 스트리머 단건 조회 API(`GET /api/streamers/{id}`)가 없어서, 기록 페이지는 스트리머 목록 전체를 불러와 id로 찾습니다.
 
+## 배포 (Vercel)
+
+- `vercel.json`: `/api/*`는 Render 백엔드(`https://streamercalendar-api.onrender.com`)로 프록시하고, 나머지 경로는 `index.html`로 보냅니다 (SPA 라우팅).
+- API 주소 기본값을 `/api`로 바꿨습니다. 로컬 개발은 Vite proxy(`vite.config.js`)가 `localhost:8080`으로 넘겨서 운영과 같은 구조입니다. 환경변수는 필요 없습니다.
+- 로컬에서 Vite proxy를 거친 조회·로그인(쿠키 발급)을 확인했습니다.
+- [ ] Vercel에서 이 저장소 Import (백엔드 Render 배포가 먼저 필요, 순서는 백엔드 PROGRESS.md 참고)
+- [ ] Render 서비스 주소가 다르면 `vercel.json`의 destination 수정
+
 ## 결정 필요
 - [ ] **입력 폼에서 유튜브 링크 필드를 뺄지.** 후보 큐(Phase 2)가 없는 지금은 이 필드가 `youtubeUrl`을 넣는 유일한 경로입니다. 또 `PUT`은 전체 교체라서, 필드를 없애면 수정할 때 기존 유튜브 링크가 지워집니다.
 - [ ] **플랫폼별 필터 추가 여부.** MVP 스펙에는 있지만 시안에는 스트리머 필터만 있습니다. API는 `platform` 파라미터를 이미 지원합니다.
 - [ ] **스트리머 수정 기능.** 넣으려면 백엔드에 `PUT /api/streamers/{id}`가 먼저 필요합니다.
 - [ ] **Next.js vs Vite 유지.** 현재는 Vite(SPA)입니다. 랜딩 페이지 SEO가 중요하지 않다면 Vite를 유지하는 편이 비용이 적습니다.
 - [ ] TypeScript 전환 여부 (포트폴리오 어필 측면)
-- [ ] 배포 방식 (Vercel / Netlify / S3 등) 및 운영 API URL
-  - SPA 라우팅을 쓰므로 호스팅에서 모든 경로를 `index.html`로 돌려주는 설정이 필요합니다.
-  - 관리자 세션 쿠키가 SameSite=Lax라서, API와 다른 사이트(도메인)에 배포하면 로그인이 동작하지 않습니다. 같은 도메인에서 `/api`를 백엔드로 넘기는 구성이 필요합니다 (백엔드 PROGRESS.md 참고).
 
 ## Phase 2
 - [ ] 유튜브 후보 큐 관리 화면 (`PENDING` 목록 → 방송 선택해서 `match` / `ignore`, `/admin` 하위)

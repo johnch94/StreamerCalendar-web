@@ -1,4 +1,5 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api'
+// 기본값 /api: 운영은 Vercel rewrites, 개발은 Vite proxy가 백엔드로 넘긴다 (같은 도메인이라 세션 쿠키·CORS 문제 없음)
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
 
 // 관리자 세션이 만료된 상태에서 쓰기 요청이 401을 받으면 AuthProvider가 이 이벤트를 듣고 로그아웃 상태로 바꾼다
 export const UNAUTHORIZED_EVENT = 'sc:unauthorized'
