@@ -25,9 +25,11 @@ function StreamDetailPanel({ date, streams, isLoading, onAddRecord }) {
         <div className="detail-panel__empty">
           <Icon name="calendar" size={40} strokeWidth={1.6} color="#D8CFF5" />
           <p className="sc-muted">이 날짜엔 등록된 방송 기록이 없어요</p>
-          <button type="button" className="btn btn--primary detail-panel__add" onClick={onAddRecord}>
-            기록 추가하기
-          </button>
+          {onAddRecord && (
+            <button type="button" className="btn btn--primary detail-panel__add" onClick={onAddRecord}>
+              기록 추가하기
+            </button>
+          )}
         </div>
       ) : (
         <ul className="detail-panel__list">

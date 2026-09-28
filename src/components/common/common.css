@@ -74,6 +74,12 @@
   color: var(--ink-soft);
 }
 
+/* RequireAdmin 로딩 문구 */
+.auth-checking {
+  padding: 48px 16px;
+  text-align: center;
+}
+
 /* 모달 */
 .modal-backdrop {
   position: fixed;

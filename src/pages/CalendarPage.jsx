@@ -7,6 +7,8 @@ import Logo from '../components/common/Logo'
 import StreamerAvatar from '../components/common/StreamerAvatar'
 import StreamDetailPanel from '../components/stream/StreamDetailPanel'
 import StreamRecordModal from '../components/stream/StreamRecordModal'
+import LogoutButton from '../auth/LogoutButton'
+import { useAuth } from '../hooks/useAuth'
 import { useStreamers } from '../hooks/useStreamers'
 import { useStreams } from '../hooks/useStreams'
 import { formatDate, isSameMonth, parseDate } from '../utils/date'
@@ -30,6 +32,8 @@ function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState(() => (isSameMonth(today, year, month) ? today : null))
   const [isFormOpen, setIsFormOpen] = useState(false)
 
+  // 일반 사용자는 조회만, 관리자로 로그인했을 때만 관리 메뉴와 기록 추가 버튼을 보여준다
+  const { isAdmin } = useAuth()
   const { streamers, error: streamersError } = useStreamers()
   const {
     streams,
@@ -115,16 +119,19 @@ function CalendarPage() {
           ))}
         </div>
 
-        <div className="top-bar__actions">
-          <Link to="/streamers" className="btn btn--outline">
-            <Icon name="user" size={16} />
-            스트리머 관리
-          </Link>
-          <button type="button" className="btn btn--primary" onClick={openForm}>
-            <Icon name="plus" size={16} strokeWidth={2.4} />
-            방송 기록 추가
-          </button>
-        </div>
+        {isAdmin && (
+          <div className="top-bar__actions">
+            <Link to="/admin/streamers" className="btn btn--outline">
+              <Icon name="user" size={16} />
+              스트리머 관리
+            </Link>
+            <button type="button" className="btn btn--primary" onClick={openForm}>
+              <Icon name="plus" size={16} strokeWidth={2.4} />
+              방송 기록 추가
+            </button>
+            <LogoutButton />
+          </div>
+        )}
       </header>
 
       <div className="calendar-page__subbar">
@@ -163,12 +170,12 @@ function CalendarPage() {
             date={selectedDate}
             streams={selectedStreams}
             isLoading={isLoading}
-            onAddRecord={openForm}
+            onAddRecord={isAdmin ? openForm : undefined}
           />
         </aside>
       </main>
 
-      {isFormOpen && (
+      {isAdmin && isFormOpen && (
         <StreamRecordModal
           streamers={streamers}
           defaultDate={defaultFormDate}

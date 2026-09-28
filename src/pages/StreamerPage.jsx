@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { createStreamer, deleteStreamer } from '../api/streamers'
 import Icon from '../components/common/Icon'
 import Logo from '../components/common/Logo'
+import LogoutButton from '../auth/LogoutButton'
 import StreamerForm from '../components/streamer/StreamerForm'
 import StreamerList from '../components/streamer/StreamerList'
 import { useStreamers } from '../hooks/useStreamers'
@@ -79,10 +80,13 @@ function StreamerPage() {
     <div className="streamer-page">
       <header className="top-bar">
         <Logo />
-        <Link to="/calendar" className="top-bar__back">
-          <Icon name="arrowLeft" size={16} />
-          캘린더로 돌아가기
-        </Link>
+        <div className="top-bar__actions">
+          <Link to="/calendar" className="top-bar__back">
+            <Icon name="arrowLeft" size={16} />
+            캘린더로 돌아가기
+          </Link>
+          <LogoutButton />
+        </div>
       </header>
 
       <main className="streamer-page__main">

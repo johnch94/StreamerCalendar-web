@@ -3,6 +3,7 @@ import Icon from '../components/common/Icon'
 import Logo from '../components/common/Logo'
 import PlatformBadge from '../components/common/PlatformBadge'
 import { GITHUB_URL } from '../constants/links'
+import { useAuth } from '../hooks/useAuth'
 import { getMonthMatrix, isSameMonth } from '../utils/date'
 import './LandingPage.css'
 
@@ -92,6 +93,9 @@ function CalendarPreview() {
 }
 
 function LandingPage() {
+  // 로그인한 관리자에게는 "로그인" 대신 관리자 페이지 링크를 보여준다
+  const { isAdmin } = useAuth()
+
   return (
     <div className="landing">
       <nav className="landing-nav">
@@ -103,6 +107,15 @@ function LandingPage() {
             <Icon name="github" />
             GitHub
           </a>
+          {isAdmin ? (
+            <Link to="/admin/streamers" className="landing-nav__login">
+              관리자 페이지
+            </Link>
+          ) : (
+            <Link to="/admin/login" className="landing-nav__login">
+              로그인
+            </Link>
+          )}
           <Link to="/calendar" className="btn btn--primary landing-nav__cta">
             캘린더 보기
           </Link>

@@ -22,7 +22,7 @@ function StreamerList({ streamers, statsById = {}, onDelete }) {
         const stats = statsById[streamer.id] ?? EMPTY_STATS
         return (
           <li key={streamer.id} className="streamer-card">
-            <Link to={`/streamers/${streamer.id}`} className="streamer-card__profile">
+            <Link to={`/admin/streamers/${streamer.id}`} className="streamer-card__profile">
               <StreamerAvatar streamer={streamer} size={52} className="jua" />
               <div className="streamer-card__info">
                 <h3 className="streamer-card__name">{streamer.name}</h3>

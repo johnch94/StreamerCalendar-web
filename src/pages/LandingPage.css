@@ -376,7 +376,7 @@
     padding-right: 16px;
   }
 
-  .landing-nav__links > a:not(.btn):not(.landing-nav__github) {
+  .landing-nav__links > a:not(.btn):not(.landing-nav__github):not(.landing-nav__login) {
     display: none;
   }
 

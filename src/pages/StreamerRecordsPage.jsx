@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router'
 import { deleteStream } from '../api/streams'
 import Icon from '../components/common/Icon'
 import Logo from '../components/common/Logo'
+import LogoutButton from '../auth/LogoutButton'
 import PlatformBadge from '../components/common/PlatformBadge'
 import StreamerAvatar from '../components/common/StreamerAvatar'
 import StreamRecordModal from '../components/stream/StreamRecordModal'
@@ -67,7 +68,7 @@ function StreamerRecordsPage() {
       <div className="streamer-list__empty">
         <Icon name="user" size={40} strokeWidth={1.6} color="#D8CFF5" />
         <p className="sc-muted">스트리머를 찾을 수 없어요. 삭제되었거나 잘못된 주소예요.</p>
-        <Link to="/streamers" className="btn btn--primary">
+        <Link to="/admin/streamers" className="btn btn--primary">
           스트리머 목록으로
         </Link>
       </div>
@@ -180,10 +181,13 @@ function StreamerRecordsPage() {
     <div className="streamer-page">
       <header className="top-bar">
         <Logo />
-        <Link to="/streamers" className="top-bar__back">
-          <Icon name="arrowLeft" size={16} />
-          스트리머 관리로 돌아가기
-        </Link>
+        <div className="top-bar__actions">
+          <Link to="/admin/streamers" className="top-bar__back">
+            <Icon name="arrowLeft" size={16} />
+            스트리머 관리로 돌아가기
+          </Link>
+          <LogoutButton />
+        </div>
       </header>
 
       <main className="streamer-page__main">
