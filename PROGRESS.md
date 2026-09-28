@@ -1,6 +1,6 @@
 # 프론트엔드 작업 진척도 (StreamerCalendar-web)
 
-> 점검일: 2026-09-28 · 기준: `06cec74` + `vercel.json` 주소 수정 · 스펙 기준: 루트 `CLAUDE.md` (MVP 기능 / UI 디자인) · 디자인 기준: `streamercalendar-html/` 퍼블리싱 시안 6종
+> 점검일: 2026-09-28 · 기준: `66421d4` (Vercel 배포 완료) · 스펙 기준: 루트 `CLAUDE.md` (MVP 기능 / UI 디자인) · 디자인 기준: `streamercalendar-html/` 퍼블리싱 시안 6종
 
 ## 요약
 
@@ -11,11 +11,11 @@
 | API 연동 (streamers / streams / auth) | ✅ 백엔드 API 전부 래핑 |
 | 빌드 / 린트 | ✅ `npm run build` 성공 · `npm run lint` 에러 0건 |
 | 테스트 | ⬜ 없음 |
-| README | ⬜ Vite 기본 템플릿 그대로 |
+| README | ✅ 서비스 소개 · 화면 캡처 7종(`docs/images`) · 구조 · 실행 방법 |
 
-**진척도(체감): MVP 기준 약 90%.** 기능과 화면은 모두 동작합니다. 테스트, README, 브라우저 수동 점검이 남아 있습니다.
+**진척도(체감): MVP 기준 약 90%.** 기능과 화면은 모두 동작합니다. 테스트와 운영 계정 수동 점검이 남아 있습니다.
 
-> 백엔드 운영 API: https://streamercalendar.onrender.com · 프론트(Vercel)는 배포 전
+> 운영: https://streamer-calendar-web.vercel.app (Vercel) · API: https://streamercalendar.onrender.com (Render, Vercel이 /api로 프록시)
 
 ## 기술 스택 (실제)
 
@@ -76,22 +76,21 @@ src/
 
 ### 🟠 P1
 1. **브라우저 수동 점검이 필요합니다.** 로그인 → 스트리머/기록 등록·수정·삭제 → 로그아웃 흐름은 API(curl)로만 확인했습니다. 로그인 페이지와 랜딩은 헤드리스 캡처로 시안과 비교했지만, 기록 추가/수정 모달과 기록이 있는 상태의 기록 표는 화면으로 확인하지 못했습니다.
-2. **README가 Vite 기본 템플릿 그대로입니다.** 포트폴리오용으로 실행 방법, 화면 캡처, 구조 설명을 써야 합니다. 쓰지 않는 `src/assets/hero.png`도 남아 있습니다.
-3. **캘린더 상세 패널에서는 수정할 수 없습니다.** 시안대로 수정·삭제는 스트리머별 기록 페이지에만 있습니다. 캘린더에서 바로 고치려면 관리자일 때 상세 항목에 수정 버튼을 붙이면 됩니다 (`StreamRecordModal`에 `record`만 넘기면 됨).
+2. **캘린더 상세 패널에서는 수정할 수 없습니다.** 시안대로 수정·삭제는 스트리머별 기록 페이지에만 있습니다. 캘린더에서 바로 고치려면 관리자일 때 상세 항목에 수정 버튼을 붙이면 됩니다 (`StreamRecordModal`에 `record`만 넘기면 됨).
 
 ### 🟡 P2
-4. 테스트가 없습니다. `utils/date.js`와 `utils/streamer.js`는 순수 함수라 Vitest 단위 테스트를 붙이기 쉽습니다. 훅, 폼, `RequireAdmin`은 React Testing Library로 테스트할 수 있습니다.
-5. 선택한 날짜가 URL에 없습니다. `?date=YYYY-MM-DD`를 추가하면 "이 방송" 링크를 바로 공유할 수 있습니다.
-6. 모달에 포커스 트랩이 없습니다 (Tab 키로 모달 밖 요소까지 이동할 수 있음).
-7. 스트리머 단건 조회 API(`GET /api/streamers/{id}`)가 없어서, 기록 페이지는 스트리머 목록 전체를 불러와 id로 찾습니다.
+3. 테스트가 없습니다. `utils/date.js`와 `utils/streamer.js`는 순수 함수라 Vitest 단위 테스트를 붙이기 쉽습니다. 훅, 폼, `RequireAdmin`은 React Testing Library로 테스트할 수 있습니다.
+4. 선택한 날짜가 URL에 없습니다. `?date=YYYY-MM-DD`를 추가하면 "이 방송" 링크를 바로 공유할 수 있습니다.
+5. 모달에 포커스 트랩이 없습니다 (Tab 키로 모달 밖 요소까지 이동할 수 있음).
+6. 스트리머 단건 조회 API(`GET /api/streamers/{id}`)가 없어서, 기록 페이지는 스트리머 목록 전체를 불러와 id로 찾습니다.
 
 ## 배포 (Vercel)
 
 - `vercel.json`: `/api/*`는 Render 백엔드(`https://streamercalendar.onrender.com`)로 프록시하고, 나머지 경로는 `index.html`로 보냅니다 (SPA 라우팅).
 - API 주소 기본값을 `/api`로 바꿨습니다. 로컬 개발은 Vite proxy(`vite.config.js`)가 `localhost:8080`으로 넘겨서 운영과 같은 구조입니다. 환경변수는 필요 없습니다.
 - 로컬에서 Vite proxy를 거친 조회·로그인(쿠키 발급)을 확인했습니다.
-- [ ] Vercel에서 이 저장소 Import (환경변수 불필요)
-- [ ] 배포 후 점검: 조회, `/admin/login` 로그인, `/admin/streamers`에서 새로고침, 쿠키 `Secure`
+- [x] Vercel 배포 (환경변수 없음). 모든 경로 새로고침 200, `/api` 프록시로 조회 200 · 비로그인 쓰기 401 · 잘못된 요청 400 확인, 헤드리스 캡처로 캘린더 렌더링과 `/admin` → 로그인 이동 확인
+- [ ] 운영 관리자 계정으로 로그인 → 등록·수정·삭제 → 로그아웃 수동 점검, 쿠키 `Secure` 확인
 
 ## 결정 필요
 - [ ] **입력 폼에서 유튜브 링크 필드를 뺄지.** 후보 큐(Phase 2)가 없는 지금은 이 필드가 `youtubeUrl`을 넣는 유일한 경로입니다. 또 `PUT`은 전체 교체라서, 필드를 없애면 수정할 때 기존 유튜브 링크가 지워집니다.
