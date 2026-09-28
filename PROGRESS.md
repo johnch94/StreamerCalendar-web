@@ -1,6 +1,6 @@
 # 프론트엔드 작업 진척도 (StreamerCalendar-web)
 
-> 점검일: 2026-09-28 · 기준: `34965e4` + 미커밋 변경(배포 설정) · 스펙 기준: 루트 `CLAUDE.md` (MVP 기능 / UI 디자인) · 디자인 기준: `streamercalendar-html/` 퍼블리싱 시안 6종
+> 점검일: 2026-09-28 · 기준: `06cec74` + `vercel.json` 주소 수정 · 스펙 기준: 루트 `CLAUDE.md` (MVP 기능 / UI 디자인) · 디자인 기준: `streamercalendar-html/` 퍼블리싱 시안 6종
 
 ## 요약
 
@@ -15,7 +15,7 @@
 
 **진척도(체감): MVP 기준 약 90%.** 기능과 화면은 모두 동작합니다. 테스트, README, 브라우저 수동 점검이 남아 있습니다.
 
-> ⚠️ 배포 설정(`vercel.json`, Vite proxy)은 아직 커밋하지 않았습니다.
+> 백엔드 운영 API: https://streamercalendar.onrender.com · 프론트(Vercel)는 배포 전
 
 ## 기술 스택 (실제)
 
@@ -87,11 +87,11 @@ src/
 
 ## 배포 (Vercel)
 
-- `vercel.json`: `/api/*`는 Render 백엔드(`https://streamercalendar-api.onrender.com`)로 프록시하고, 나머지 경로는 `index.html`로 보냅니다 (SPA 라우팅).
+- `vercel.json`: `/api/*`는 Render 백엔드(`https://streamercalendar.onrender.com`)로 프록시하고, 나머지 경로는 `index.html`로 보냅니다 (SPA 라우팅).
 - API 주소 기본값을 `/api`로 바꿨습니다. 로컬 개발은 Vite proxy(`vite.config.js`)가 `localhost:8080`으로 넘겨서 운영과 같은 구조입니다. 환경변수는 필요 없습니다.
 - 로컬에서 Vite proxy를 거친 조회·로그인(쿠키 발급)을 확인했습니다.
-- [ ] Vercel에서 이 저장소 Import (백엔드 Render 배포가 먼저 필요, 순서는 백엔드 PROGRESS.md 참고)
-- [ ] Render 서비스 주소가 다르면 `vercel.json`의 destination 수정
+- [ ] Vercel에서 이 저장소 Import (환경변수 불필요)
+- [ ] 배포 후 점검: 조회, `/admin/login` 로그인, `/admin/streamers`에서 새로고침, 쿠키 `Secure`
 
 ## 결정 필요
 - [ ] **입력 폼에서 유튜브 링크 필드를 뺄지.** 후보 큐(Phase 2)가 없는 지금은 이 필드가 `youtubeUrl`을 넣는 유일한 경로입니다. 또 `PUT`은 전체 교체라서, 필드를 없애면 수정할 때 기존 유튜브 링크가 지워집니다.
